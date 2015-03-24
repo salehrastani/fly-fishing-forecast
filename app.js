@@ -30,6 +30,6 @@ weatherApp.controller('mainController', ['$scope', 'cityService', function ($sco
 }]);
 
 weatherApp.controller('forecastController', ['$scope', 'cityService', function($scope, cityService){
-  debugger
+
   $scope.city = cityService.city;
 }]);
