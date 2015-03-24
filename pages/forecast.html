@@ -1,9 +1,16 @@
-<div ng-controller="forecastController">
-  <h3>forecast for {{city}}</h3>
-  <div ng-repeat="day in weatherResult">
-    {{day.}}
-
-
+Forecast for {{city}}
+<hr />
+<div ng-repeat="day in days">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{convertDate(day.dt)}}</h3>
+          <div class="panel-body">
+            Daytime temperature: {{convertTemperature(day.temp.day)}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
 </div>
