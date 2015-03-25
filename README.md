@@ -1,2 +1,2 @@
 # weather
-Angular.js weatherforecast app
+Angular.js weather-forecast-app
