@@ -14,11 +14,16 @@ weatherApp.config(function ($routeProvider){
     controller: 'forecastController'
   })
 
+  .when('/forecast/:days', {
+    templateUrl: 'pages/forecast.html',
+    controller: 'forecastController'
+  });
+
 });
 
 
 weatherApp.service('cityService',function(){
-  this.city = '';
+  this.city = 'Truckee';
 });
 
 
@@ -31,12 +36,15 @@ weatherApp.controller('mainController', ['$scope', 'cityService', function ($sco
 
 }]);
 
-weatherApp.controller('forecastController', ['$scope', '$resource', 'cityService', function($scope, $resource, cityService){
+weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParams', 'cityService', function($scope, $resource, $routeParams, cityService){
+
+  $scope.days = $routeParams.days || '2';
 
   $scope.city = cityService.city;
   $scope.weatherApi = $resource("http://api.openweathermap.org/data/2.5/forecast/daily",{callback: "JSON_CALLBACK"}, {get: {method: "JSONP"}});
-  $scope.weatherResult = $scope.weatherApi.get({q : $scope.city, cnt : 2}, function(data) {
-      $scope.days= data.list
+  debugger
+  $scope.weatherResult = $scope.weatherApi.get({q : $scope.city, cnt : $scope.days}, function(data) {
+      $scope.listOfDays = data.list
     });
 
   $scope.convertTemperature = function(degK){
