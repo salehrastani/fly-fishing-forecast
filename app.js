@@ -42,7 +42,6 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
 
   $scope.city = cityService.city;
   $scope.weatherApi = $resource("http://api.openweathermap.org/data/2.5/forecast/daily",{callback: "JSON_CALLBACK"}, {get: {method: "JSONP"}});
-  debugger
   $scope.weatherResult = $scope.weatherApi.get({q : $scope.city, cnt : $scope.days}, function(data) {
       $scope.listOfDays = data.list
     });
@@ -56,4 +55,13 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
   };
 
 }]);
+
+weatherApp.directive('dailyForecasts', function(){
+  return {
+    restrict: 'E',
+    templateUrl: 'directives/daily-forecasts.html',
+    replace: true,
+
+  }
+})
 
